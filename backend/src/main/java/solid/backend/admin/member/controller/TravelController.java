@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import solid.backend.admin.member.dto.AddTravelDto;
 import solid.backend.admin.member.dto.TravelDto;
 import solid.backend.admin.member.dto.TravelSummaryDto;
+import solid.backend.admin.member.dto.UpdateTravelDto;
 import solid.backend.admin.member.service.TravelService;
 import java.util.List;
 
@@ -50,6 +51,24 @@ public class TravelController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("FAIL");
+        }
+    }
+
+    /**
+     * 설명 : 여행 상품 수정
+     * @return UpdateTravelDto
+     */
+    @ResponseBody
+    @PutMapping("/updateTravel")
+    public ResponseEntity<String> updateTravel(@RequestBody UpdateTravelDto updateTravelDto) {
+        try {
+            travelService.updateTravel(updateTravelDto);
+            return ResponseEntity.ok("SUCCESS");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return  ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("FAIL");
         }

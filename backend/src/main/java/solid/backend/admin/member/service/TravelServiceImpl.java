@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import solid.backend.admin.member.dto.AddTravelDto;
 import solid.backend.admin.member.dto.TravelDto;
 import solid.backend.admin.member.dto.TravelSummaryDto;
+import solid.backend.admin.member.dto.UpdateTravelDto;
 import solid.backend.admin.member.repository.TravelRepository;
 
 import java.util.List;
@@ -41,5 +42,27 @@ public class TravelServiceImpl implements TravelService {
         travelDto.setTravelImg(addTravelDto.getTravelImg());
 
         travelRepository.save(travelDto);
+    }
+
+    @Override
+    public void updateTravel(UpdateTravelDto updateTravelDto) {
+        TravelDto travel = travelRepository.findById(Long.valueOf(updateTravelDto.getTravelId()))
+                .orElseThrow(() -> new IllegalArgumentException("해당 여행 상품이 존재하지 않습니다: id = " + updateTravelDto.getTravelId()));
+
+        // 2. 필드 값 업데이트
+        travel.setTravelName(updateTravelDto.getTravelName());
+        travel.setTravelPrice(updateTravelDto.getTravelPrice());
+        travel.setTravelAmount(updateTravelDto.getTravelAmount());
+        travel.setTravelSold(updateTravelDto.isTravelSold());
+        travel.setTravelComment(updateTravelDto.getTravelComment());
+        travel.setTravelLabel(updateTravelDto.getTravelLabel());
+        travel.setTravelStartDt(updateTravelDto.getTravelStartDt());
+        travel.setTravelEndDt(updateTravelDto.getTravelEndDt());
+        travel.setTravelUploadDt(updateTravelDto.getTravelUploadDt());
+        travel.setTravelUpdateDt(updateTravelDto.getTravelUpdateDt());
+        travel.setTravelImg(updateTravelDto.getTravelImg());
+
+        // 3. 저장
+        travelRepository.save(travel);
     }
 }
