@@ -2,10 +2,7 @@ package solid.backend.admin.member.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import solid.backend.admin.member.dto.AddTravelDto;
-import solid.backend.admin.member.dto.TravelDto;
-import solid.backend.admin.member.dto.TravelSummaryDto;
-import solid.backend.admin.member.dto.UpdateTravelDto;
+import solid.backend.admin.member.dto.*;
 import solid.backend.admin.member.repository.TravelRepository;
 
 import java.util.List;
@@ -64,5 +61,18 @@ public class TravelServiceImpl implements TravelService {
 
         // 3. 저장
         travelRepository.save(travel);
+    }
+
+    @Override
+    public void deleteTravel(DeleteTravelDto deleteTravelDto) {
+        Integer id = deleteTravelDto.getTravelId();
+        System.out.println(id);
+
+        if(id == null)
+            throw new IllegalArgumentException("삭제할 여행 상품이 없습니다.");
+        if(!travelRepository.existsById(Long.valueOf(id)))
+            throw new IllegalArgumentException("해당 여행 상품이 존재하지 않습니다.");
+
+        travelRepository.deleteById(Long.valueOf(id));
     }
 }

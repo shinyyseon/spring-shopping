@@ -5,10 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import solid.backend.admin.member.dto.AddTravelDto;
-import solid.backend.admin.member.dto.TravelDto;
-import solid.backend.admin.member.dto.TravelSummaryDto;
-import solid.backend.admin.member.dto.UpdateTravelDto;
+import solid.backend.admin.member.dto.*;
 import solid.backend.admin.member.service.TravelService;
 import java.util.List;
 
@@ -69,6 +66,20 @@ public class TravelController {
         } catch (Exception e) {
             e.printStackTrace();
             return  ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("FAIL");
+        }
+    }
+
+    @ResponseBody
+    @DeleteMapping("/deleteTravel")
+    public ResponseEntity<String> deleteTravel(@RequestBody DeleteTravelDto deleteTravelDto) {
+        try {
+            travelService.deleteTravel(deleteTravelDto);
+            return ResponseEntity.ok("SUCCESS");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return   ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("FAIL");
         }
