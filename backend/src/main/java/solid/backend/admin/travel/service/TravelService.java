@@ -1,6 +1,6 @@
-package solid.backend.admin.member.service;
+package solid.backend.admin.travel.service;
 
-import solid.backend.admin.member.dto.*;
+import solid.backend.admin.travel.dto.*;
 
 import java.util.List;
 

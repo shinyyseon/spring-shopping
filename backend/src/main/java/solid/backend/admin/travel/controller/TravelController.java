@@ -1,12 +1,13 @@
-package solid.backend.admin.member.controller;
+package solid.backend.admin.travel.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import solid.backend.admin.member.dto.*;
-import solid.backend.admin.member.service.TravelService;
+import solid.backend.admin.travel.service.TravelService;
+import solid.backend.admin.travel.dto.*;
+
 import java.util.List;
 
 @Controller

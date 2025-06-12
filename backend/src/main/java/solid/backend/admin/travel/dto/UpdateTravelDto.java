@@ -1,18 +1,13 @@
-package solid.backend.admin.member.dto;
+package solid.backend.admin.travel.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 
-@Data
-@Entity(name = "travel")
-public class TravelDto {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Getter
+@Setter
+public class UpdateTravelDto {
     private Integer travelId;
     private String travelName;
     private Integer travelPrice;

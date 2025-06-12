@@ -1,11 +1,12 @@
-package solid.backend.admin.member.service;
+package solid.backend.admin.travel.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import solid.backend.admin.member.dto.*;
-import solid.backend.admin.member.repository.TravelRepository;
+import solid.backend.admin.travel.repository.TravelRepository;
+import solid.backend.admin.travel.dto.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -43,24 +44,22 @@ public class TravelServiceImpl implements TravelService {
 
     @Override
     public void updateTravel(UpdateTravelDto updateTravelDto) {
-        TravelDto travel = travelRepository.findById(Long.valueOf(updateTravelDto.getTravelId()))
+        TravelDto travelDto = travelRepository.findById(Long.valueOf(updateTravelDto.getTravelId()))
                 .orElseThrow(() -> new IllegalArgumentException("해당 여행 상품이 존재하지 않습니다: id = " + updateTravelDto.getTravelId()));
 
-        // 2. 필드 값 업데이트
-        travel.setTravelName(updateTravelDto.getTravelName());
-        travel.setTravelPrice(updateTravelDto.getTravelPrice());
-        travel.setTravelAmount(updateTravelDto.getTravelAmount());
-        travel.setTravelSold(updateTravelDto.isTravelSold());
-        travel.setTravelComment(updateTravelDto.getTravelComment());
-        travel.setTravelLabel(updateTravelDto.getTravelLabel());
-        travel.setTravelStartDt(updateTravelDto.getTravelStartDt());
-        travel.setTravelEndDt(updateTravelDto.getTravelEndDt());
-        travel.setTravelUploadDt(updateTravelDto.getTravelUploadDt());
-        travel.setTravelUpdateDt(updateTravelDto.getTravelUpdateDt());
-        travel.setTravelImg(updateTravelDto.getTravelImg());
+        travelDto.setTravelName(updateTravelDto.getTravelName());
+        travelDto.setTravelPrice(updateTravelDto.getTravelPrice());
+        travelDto.setTravelAmount(updateTravelDto.getTravelAmount());
+        travelDto.setTravelSold(updateTravelDto.isTravelSold());
+        travelDto.setTravelComment(updateTravelDto.getTravelComment());
+        travelDto.setTravelLabel(updateTravelDto.getTravelLabel());
+        travelDto.setTravelStartDt(updateTravelDto.getTravelStartDt());
+        travelDto.setTravelEndDt(updateTravelDto.getTravelEndDt());
+        travelDto.setTravelUploadDt(updateTravelDto.getTravelUploadDt());
+        travelDto.setTravelUpdateDt(updateTravelDto.getTravelUpdateDt());
+        travelDto.setTravelImg(updateTravelDto.getTravelImg());
 
-        // 3. 저장
-        travelRepository.save(travel);
+        travelRepository.save(travelDto);
     }
 
     @Override

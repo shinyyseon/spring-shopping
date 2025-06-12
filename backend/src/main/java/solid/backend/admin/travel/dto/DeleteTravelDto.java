@@ -1,4 +1,4 @@
-package solid.backend.admin.member.dto;
+package solid.backend.admin.travel.dto;
 
 import lombok.Data;
 
