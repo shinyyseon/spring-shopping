@@ -7,7 +7,7 @@ import solid.backend.admin.travel.dto.TravelSummaryDto;
 
 import java.util.List;
 
-public interface TravelRepository extends JpaRepository<TravelDto, Long> {
+public interface TravelRepository extends JpaRepository<TravelDto, Integer> {
     @Query("SELECT new solid.backend.admin.travel.dto.TravelSummaryDto(t.travelId, t.travelName, t.travelPrice, t.travelAmount) FROM travel t")
     List<TravelSummaryDto> findAllSummary();
 }

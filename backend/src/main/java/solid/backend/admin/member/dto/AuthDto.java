@@ -9,5 +9,6 @@ import lombok.Data;
 public class AuthDto {
 
     @Id
+    private String authId;
     private String authName;
 }

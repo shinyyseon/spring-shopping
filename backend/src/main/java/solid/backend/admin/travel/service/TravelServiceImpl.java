@@ -44,7 +44,7 @@ public class TravelServiceImpl implements TravelService {
 
     @Override
     public void updateTravel(UpdateTravelDto updateTravelDto) {
-        TravelDto travelDto = travelRepository.findById(Long.valueOf(updateTravelDto.getTravelId()))
+        TravelDto travelDto = travelRepository.findById(updateTravelDto.getTravelId())
                 .orElseThrow(() -> new IllegalArgumentException("해당 여행 상품이 존재하지 않습니다: id = " + updateTravelDto.getTravelId()));
 
         travelDto.setTravelName(updateTravelDto.getTravelName());
@@ -69,9 +69,9 @@ public class TravelServiceImpl implements TravelService {
 
         if(id == null)
             throw new IllegalArgumentException("삭제할 여행 상품이 없습니다.");
-        if(!travelRepository.existsById(Long.valueOf(id)))
+        if(!travelRepository.existsById(id))
             throw new IllegalArgumentException("해당 여행 상품이 존재하지 않습니다.");
 
-        travelRepository.deleteById(Long.valueOf(id));
+        travelRepository.deleteById(id);
     }
 }
