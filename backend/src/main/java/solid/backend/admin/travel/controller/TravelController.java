@@ -62,7 +62,7 @@ public class TravelController {
      * @return ResponseBodyEntity<String>
      */
     @ResponseBody
-    @PutMapping("/updateTravel")
+    @PostMapping("/updateTravel")
     public ResponseEntity<String> updTravelDto(@RequestBody TravelUpdDto travelUpdDto) {
         try {
             travelService.updTravelDto(travelUpdDto);
@@ -81,7 +81,7 @@ public class TravelController {
      * @return ResponseBodyEntity<String>
      */
     @ResponseBody
-    @DeleteMapping("/deleteTravel")
+    @PostMapping("/deleteTravel")
     public ResponseEntity<String> delTravelDto(@RequestBody Integer travelId) {
         try {
             travelService.delTravelDto(travelId);
