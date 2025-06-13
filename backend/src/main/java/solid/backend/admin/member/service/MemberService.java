@@ -11,5 +11,11 @@ public interface MemberService {
      * */
     List<MemberListDto> getMemberList();
 
+    /**
+     * 설명: 사용자 관리 정보 검색
+     * @param memberId
+     * @param memberName
+     * @return List<MemberlListDto>
+     * */
     List<MemberListDto> getMemberList(String memberId, String memberName);
 }

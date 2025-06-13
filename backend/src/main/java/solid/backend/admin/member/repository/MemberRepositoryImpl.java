@@ -4,6 +4,7 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 import solid.backend.admin.member.dto.MemberListDto;
 import solid.backend.entity.QAuth;
@@ -11,6 +12,7 @@ import solid.backend.entity.QMember;
 
 import java.util.List;
 
+@Repository
 @RequiredArgsConstructor
 public class MemberRepositoryImpl implements MemberRepositoryCustom {
 
@@ -28,7 +30,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
                         member.memberEmail,
                         member.memberPhone,
                         member.memberBirth,
-                        auth.authName // authName이 단일일 경우
+                        auth.authName
                 ))
                 .from(member)
                 .leftJoin(member.authList, auth)

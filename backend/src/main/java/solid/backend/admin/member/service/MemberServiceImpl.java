@@ -16,7 +16,7 @@ public class MemberServiceImpl implements MemberService {
 
     /**
      * 설명: 여행 상품 정보 가져오기
-     * @return List<MemverListDto>, List<AuthList>
+     * @return List<MemberListDto>
      * */
     @Override
     public List<MemberListDto> getMemberList() {
@@ -34,8 +34,17 @@ public class MemberServiceImpl implements MemberService {
                 )).collect(Collectors.toList());
     }
 
+    /**
+     * 설명: 여행 상품 정보 가져오기
+     * @param memberId
+     * @param  memberName
+     * @return List<MemberListDto>
+     * */
     @Override
     public List<MemberListDto> getMemberList(String memberId, String memberName) {
+        System.out.println("memberId: " + memberId);
+        System.out.println("memberName: " + memberName);
+
         return memberRepository.findBySearchCondition(memberId, memberName);
     }
 

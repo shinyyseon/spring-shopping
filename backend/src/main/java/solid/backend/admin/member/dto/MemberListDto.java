@@ -1,9 +1,14 @@
 package solid.backend.admin.member.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class MemberListDto {
     private String memberId;
     private String memberName;
@@ -11,13 +16,4 @@ public class MemberListDto {
     private String memberPhone;
     private LocalDate memberBirth;
     private String authName;
-
-    public MemberListDto(String memberId, String memberName, String memberEmail, String memberPhone, LocalDate memberBirth, String authName) {
-        this.memberId = memberId;
-        this.memberName = memberName;
-        this.memberEmail = memberEmail;
-        this.memberPhone = memberPhone;
-        this.memberBirth = memberBirth;
-        this.authName = authName;
-    }
 }
