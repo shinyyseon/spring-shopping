@@ -38,6 +38,17 @@ public class TravelController {
     }
 
     /**
+     * 설명 : 여행 상품 검색
+     * @param travelSearchDto
+     * @return List<TravelListAllDto>
+     */
+    @ResponseBody
+    @GetMapping("/search")
+    public List<TravelListDto> searchTravelList(@RequestBody TravelSearchDto travelSearchDto) {
+        return travelService.searchTravelList(travelSearchDto);
+    }
+
+    /**
      * 설명 : 여행 상품 추가
      * @param travelAddDto
      * @return ResponseBodyEntity<String>
@@ -62,7 +73,7 @@ public class TravelController {
      * @return ResponseBodyEntity<String>
      */
     @ResponseBody
-    @PostMapping("/updateTravel")
+    @PutMapping("/updateTravel")
     public ResponseEntity<String> updTravelDto(@RequestBody TravelUpdDto travelUpdDto) {
         try {
             travelService.updTravelDto(travelUpdDto);
@@ -81,7 +92,7 @@ public class TravelController {
      * @return ResponseBodyEntity<String>
      */
     @ResponseBody
-    @PostMapping("/deleteTravel")
+    @DeleteMapping("/deleteTravel")
     public ResponseEntity<String> delTravelDto(@RequestBody Integer travelId) {
         try {
             travelService.delTravelDto(travelId);

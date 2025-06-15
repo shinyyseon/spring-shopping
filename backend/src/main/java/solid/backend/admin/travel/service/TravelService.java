@@ -19,6 +19,12 @@ public interface TravelService {
     List<TravelListAllDto> getTravelListAll();
 
     /**
+     * 설명: 여행 상품 검색
+     * @return List<TravelListDto>
+     * */
+    List<TravelListDto> searchTravelList(TravelSearchDto travelSearchDto);
+
+    /**
      * 설명: 여행 상품 등록
      * @param travelAddDto
      * */

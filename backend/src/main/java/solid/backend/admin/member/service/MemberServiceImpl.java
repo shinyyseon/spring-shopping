@@ -2,6 +2,8 @@ package solid.backend.admin.member.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import solid.backend.admin.member.dto.MemberListDto;
+import solid.backend.admin.member.dto.MemberSearchDto;
+import solid.backend.admin.member.repository.MemberQueryRepository;
 import solid.backend.admin.member.repository.MemberRepository;
 import solid.backend.entity.Auth;
 
@@ -13,6 +15,7 @@ import java.util.stream.Collectors;
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
+    private final MemberQueryRepository memberQueryRepository;
 
     /**
      * 설명: 여행 상품 정보 가져오기
@@ -36,16 +39,12 @@ public class MemberServiceImpl implements MemberService {
 
     /**
      * 설명: 여행 상품 정보 가져오기
-     * @param memberId
-     * @param  memberName
+     * @param memberSearchDto
      * @return List<MemberListDto>
      * */
     @Override
-    public List<MemberListDto> getMemberList(String memberId, String memberName) {
-        System.out.println("memberId: " + memberId);
-        System.out.println("memberName: " + memberName);
-
-        return memberRepository.findBySearchCondition(memberId, memberName);
+    public List<MemberListDto> searchMemberList(MemberSearchDto memberSearchDto) {
+        return memberQueryRepository.findMember(memberSearchDto);
     }
 
 }

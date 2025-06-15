@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import solid.backend.admin.member.dto.MemberListDto;
+import solid.backend.admin.member.dto.MemberSearchDto;
 import solid.backend.admin.member.service.MemberService;
 
 import java.util.List;
@@ -30,12 +31,9 @@ public class MemberController {
      * 설명 : 회원 정보 가져오기
      * @return MemberDto
      */
-    @GetMapping("/list")
-    public ResponseEntity<List<MemberListDto>> getMemberList(
-            @RequestParam(required = false) String memberId,
-            @RequestParam(required = false) String memberName
-    ) {
-        List<MemberListDto> members = memberService.getMemberList(memberId, memberName);
-        return ResponseEntity.ok(members);
+    @ResponseBody
+    @GetMapping("/search")
+    public List<MemberListDto> searchMemberList(@RequestBody MemberSearchDto memberSearchDto) {
+        return memberService.searchMemberList(memberSearchDto);
     }
 }

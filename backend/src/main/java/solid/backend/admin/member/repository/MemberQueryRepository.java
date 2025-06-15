@@ -3,23 +3,25 @@ package solid.backend.admin.member.repository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import lombok.RequiredArgsConstructor;
+import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 import solid.backend.admin.member.dto.MemberListDto;
+import solid.backend.admin.member.dto.MemberSearchDto;
 import solid.backend.entity.QAuth;
 import solid.backend.entity.QMember;
 
 import java.util.List;
 
 @Repository
-@RequiredArgsConstructor
-public class MemberRepositoryImpl implements MemberRepositoryCustom {
-
+public class MemberQueryRepository {
     private final JPAQueryFactory queryFactory;
 
-    @Override
-    public List<MemberListDto> findBySearchCondition(String memberId, String memberName) {
+    public MemberQueryRepository(EntityManager em) {
+        this.queryFactory = new JPAQueryFactory(em);
+    }
+
+    public List<MemberListDto> findMember(MemberSearchDto memberSearchDto) {
         QMember member = QMember.member;
         QAuth auth = QAuth.auth;
 
@@ -35,8 +37,8 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
                 .from(member)
                 .leftJoin(member.authList, auth)
                 .where(
-                        eqMemberId(memberId),
-                        eqMemberName(memberName)
+                        eqMemberId(memberSearchDto.getMemberId()),
+                        containsMemberName(memberSearchDto.getMemberName())
                 )
                 .fetch();
     }
@@ -45,7 +47,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
         return StringUtils.hasText(memberId) ? QMember.member.memberId.eq(memberId) : null;
     }
 
-    private BooleanExpression eqMemberName(String memberName) {
-        return StringUtils.hasText(memberName) ? QMember.member.memberName.eq(memberName) : null;
+    private BooleanExpression containsMemberName(String memberName) {
+        return StringUtils.hasText(memberName) ? QMember.member.memberName.contains(memberName) : null;
     }
 }
